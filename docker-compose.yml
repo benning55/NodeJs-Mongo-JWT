@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  backend:
+    container_name: test-node-api
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./backend:/usr/src/app
+    links:
+      - mongodb
+  mongodb:
+    container_name: test-mongodb
+    image: mongo:4.2.12
+    ports:
+      - 27017:27017
+    volumes:
+      - ./docker_volumes/db:/data/db
